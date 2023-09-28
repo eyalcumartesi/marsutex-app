@@ -16,6 +16,17 @@ cloudinary.config({
 
 app.use(cors());
 
+app.get("/*",(req, res){
+	res.sendFile(
+		path.join(__dirname,"../client/build/index.html"),
+		function(err){
+			if(err){
+				res.status(500).send(err.message)
+			}
+		}
+	)
+})
+
 const getAllImages = async (prefix) => {
 	let allImages = [];
 	let nextCursor = null;
